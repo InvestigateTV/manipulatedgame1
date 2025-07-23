@@ -56,7 +56,7 @@
   background: #e63946;
 }
 
-.quiz-container .submit-btn,
+.quiz-container .next-btn,
 .quiz-result .retake-btn {
   background: #222;
   color: #fff;
@@ -161,7 +161,7 @@
       <div class="question-number"></div>
       <img id="question-image" class="question" src="" alt="Question Image">
       <div class="options"></div>
-      <button class="submit-btn">Submit</button>
+      <button class="next-btn">Next</button>
     </div>
 
     <div class="quiz-result"></div>
@@ -205,7 +205,7 @@
   const quizContainer = document.querySelector(".quiz-container");
   const questionNumberEl = document.querySelector(".question-number");
   const options = document.querySelector(".options");
-  const submitBtn = document.querySelector(".submit-btn");
+  const NextBtn = document.querySelector(".Next-btn");
   const quizResult = document.querySelector(".quiz-result");
   const startBtnContainer = document.querySelector(".start-btn-container");
   const startBtn = document.querySelector(".start-btn");
@@ -315,7 +315,7 @@
     }
   };
 
-  submitBtn.addEventListener("click", displayNextQuestion);
+  NextBtn.addEventListener("click", displayNextQuestion);
 
   startBtn.addEventListener("click", () => {
     startBtnContainer.style.display = "none";

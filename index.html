@@ -107,10 +107,6 @@
   .quiz-container .options {
     grid-template-columns: 1fr;
   }
-  .question-image .options {
-    height: 100%;
-    width: 100%;
-}
 }
 
 .start-btn-container {
@@ -139,6 +135,14 @@
   cursor: pointer;
   text-transform: uppercase;
   font-weight: bold;
+}
+.quiz-container img.question {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em auto;
+  border-radius: 8px;
+  object-fit: contain;
 }
   </style>
   <body>

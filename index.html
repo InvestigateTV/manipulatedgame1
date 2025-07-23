@@ -206,7 +206,7 @@
   const quizContainer = document.querySelector(".quiz-container");
   const questionNumberEl = document.querySelector(".question-number");
   const options = document.querySelector(".options");
-  const NextBtn = document.querySelector(".Next-btn");
+  const nextBtn = document.querySelector(".next-btn");
   const quizResult = document.querySelector(".quiz-result");
   const startBtnContainer = document.querySelector(".start-btn-container");
   const startBtn = document.querySelector(".start-btn");
@@ -316,7 +316,7 @@
     }
   };
 
-  NextBtn.addEventListener("click", displayNextQuestion);
+  nextBtn.addEventListener("click", displayNextQuestion);
 
   startBtn.addEventListener("click", () => {
     startBtnContainer.style.display = "none";

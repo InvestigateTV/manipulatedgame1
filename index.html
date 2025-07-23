@@ -136,15 +136,20 @@
   text-transform: uppercase;
   font-weight: bold;
 }
+    
 .quiz-container img.question {
   max-width: 100%;
+  max-height: 60vh; /* limits height to 60% of the viewport */
   height: auto;
   display: block;
   margin: 1em auto;
-  border-radius: 8px;
   object-fit: contain;
+  border-radius: 8px;
 }
+
   </style>
+
+  
   <body>
     <div class="start-btn-container">
       <h2>Manipulated</h2>
@@ -160,9 +165,9 @@
     </div>
 
     <div class="quiz-result"></div>
-
-
   </body>
+
+  
 <script>
   let quizData = [
     {

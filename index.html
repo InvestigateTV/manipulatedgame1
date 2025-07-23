@@ -57,7 +57,7 @@
   background: #e63946;
 }
 
-.quiz-container .next-btn,
+.quiz-container .submit-btn,
 .quiz-result .retake-btn {
   background: #222;
   color: #fff;
@@ -193,7 +193,7 @@
 const quizContainer = document.querySelector(".quiz-container");
 const question = document.querySelector(".quiz-container .question");
 const options = document.querySelector(".quiz-container .options");
-const nextBtn = document.querySelector(".quiz-container .submit-btn");
+const submitBtn = document.querySelector(".quiz-container .submit-btn");
 const quizResult = document.querySelector(".quiz-result");
 const startBtnContainer = document.querySelector(".start-btn-container");
 const startBtn = document.querySelector(".start-btn-container .start-btn");
@@ -312,7 +312,7 @@ const displayNextQuestion = () => {
   createQuestion();
 };
 
-nextBtn.addEventListener("click", displayNextQuestion);
+submitBtn.addEventListener("click", displayNextQuestion);
 
 startBtn.addEventListener("click", () => {
   startBtnContainer.style.display = "none";

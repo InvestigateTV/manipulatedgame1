@@ -1,80 +1,34 @@
 let quizData = [
   {
-    question: "What is the capital of Japan?",
-    options: ["Tokyo", "Beijing", "Seoul", "Bangkok"],
-    correct: "Tokyo",
+    question: "/images/Manipulated Game-1.png",
+    options: ["AI", "Not AI"],
+    correct: "AI",
   },
   {
-    question: "Which planet is known as the 'Red Planet'?",
-    options: ["Mars", "Venus", "Jupiter", "Mercury"],
-    correct: "Mars",
-  },
-  {
-    question:
-      "Which famous scientist developed the theory of general relativity?",
-    options: [
-      "Isaac Newton",
-      "Albert Einstein",
-      "Stephen Hawking",
-      "Galileo Galilei",
-    ],
-    correct: "Albert Einstein",
-  },
-  {
-    question: "What is the largest mammal on Earth?",
-    options: ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
-    correct: "Blue Whale",
-  },
-  {
-    question: "Which famous artist painted the Mona Lisa?",
-    options: [
-      "Vincent van Gogh",
-      "Pablo Picasso",
-      "Leonardo da Vinci",
-      "Michelangelo",
-    ],
-    correct: "Leonardo da Vinci",
-  },
-  {
-    question: "Which playwright wrote the tragedy 'Romeo and Juliet'?",
-    options: [
-      "William Shakespeare",
-      "George Bernard Shaw",
-      "Oscar Wilde",
-      "Charles Dickens",
-    ],
-    correct: "William Shakespeare",
-  },
-  {
-    question: "Who is known as the father of modern physics?",
-    options: [
-      "Isaac Newton",
-      "Albert Einstein",
-      "Galileo Galilei",
-      "Niels Bohr",
-    ],
-    correct: "Albert Einstein",
+    question: "/images/Manipulated Game-2.png",
+    options: ["AI", "Not AI"],
+    correct: "Not AI",
   },
   {
     question:
-      "Which ancient wonder of the world was a massive statue of the Greek god Zeus?",
-    options: [
-      "Great Pyramid of Giza",
-      "Hanging Gardens of Babylon",
-      "Statue of Zeus at Olympia",
-      "Colossus of Rhodes",
-    ],
-    correct: "Statue of Zeus at Olympia",
+      "/images/Manipulated Game-3.png",
+    options: ["AI", "Not AI"],
+    correct: "AI",
   },
   {
-    question: "Who wrote the novel 'Pride and Prejudice'?",
-    options: [
-      "Emily Brontë",
-      "Charlotte Brontë",
-      "Jane Austen",
-      "Louisa May Alcott",
-    ],
-    correct: "Jane Austen",
+    question: "/images/Manipulated Game-4.png",
+    options: ["AI", "Not AI"],
+    correct: "Not AI",
+  },
+  {
+    question: "/images/Manipulated Game-5.png",
+    options: ["AI", "Not AI"],
+    correct: "Not AI",
+  },
+  {
+    question: "/images/Manipulated Game-6.png",
+    options: ["AI", "Not AI"],
+    correct: "AI",
   },
 ];
 

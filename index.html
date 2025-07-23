@@ -146,7 +146,7 @@
 
     <div class="quiz-container">
       <h1>AI or Not?</h1>
-      <img src= class="question" >
+      <img id="question-image" class="question" src="" alt="Question Image">
       <div class="options"></div>
       <button class="submit-btn">Submit</button>
     </div>
@@ -197,7 +197,8 @@ const submitBtn = document.querySelector(".quiz-container .submit-btn");
 const quizResult = document.querySelector(".quiz-result");
 const startBtnContainer = document.querySelector(".start-btn-container");
 const startBtn = document.querySelector(".start-btn-container .start-btn");
-
+const questionImage = document.getElementById("question-image");
+  questionImage.src = currentQuestion.question;
 let questionNumber = 0;
 let score = 0;
 const MAX_QUESTIONS = 5;

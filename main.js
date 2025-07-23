@@ -89,7 +89,7 @@ const startBtn = document.querySelector(".start-btn-container .start-btn");
 let questionNumber = 0;
 let score = 0;
 const MAX_QUESTIONS = 5;
-let timerInterval;
+
 
 const shuffleArray = (array) => {
   return array.slice().sort(() => Math.random() - 0.5);
@@ -122,30 +122,7 @@ const checkAnswer = (e) => {
   });
 };
 
-const createQuestion = () => {
-  clearInterval(timerInterval);
-
-  let secondsLeft = 9;
-  const timerDisplay = document.querySelector(".quiz-container .timer");
-  timerDisplay.classList.remove("danger");
-
-  timerDisplay.textContent = `Time Left: 10 seconds`;
-
-  timerInterval = setInterval(() => {
-    timerDisplay.textContent = `Time Left: ${secondsLeft
-      .toString()
-      .padStart(2, "0")} seconds`;
-    secondsLeft--;
-
-    if (secondsLeft < 3) {
-      timerDisplay.classList.add("danger");
-    }
-
-    if (secondsLeft < 0) {
-      clearInterval(timerInterval);
-      displayNextQuestion();
-    }
-  }, 1000);
+const createQuestion = () 
 
   options.innerHTML = "";
   question.innerHTML = `<span class='question-number'>${
@@ -201,7 +178,7 @@ const displayQuizResult = () => {
     resultItem.innerHTML = `<div class="question">Question ${i + 1}: ${
       quizData[i].question
     }</div>
-    <div class="user-answer">Your answer: ${userAnswer || "Not Answered"}</div>
+    <div class="user-answer">Your answer: ${userAnswer}</div>
     <div class="correct-answer">Correct answer: ${correctAnswer}</div>`;
 
     quizResult.appendChild(resultItem);

@@ -3,9 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/style.css" />
+    <title>InvestigateTV AI Quiz</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
+  <style>
+    .quiz-container {
+  font-family: "Roboto", sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+  display: none;
+}
+
+
+.quiz-container h2.question {
+  font-size: 20px;
+  background: #d0ecff;
+  padding: 16px;
+  border-radius: 8px;
+  font-weight: normal;
+  line-height: 1.6;
+}
+
+.quiz-container .options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.quiz-container .option {
+  border: none;
+  padding: 24px 32px;
+  font-size: 18px;
+  background: #1d3557;
+  color: #fff;
+}
+
+.quiz-container button {
+  cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.option.correct {
+  background: #51e351;
+  color: #222;
+}
+
+.option.incorrect {
+  background: #e63946;
+}
+
+.quiz-container .next-btn,
+.quiz-result .retake-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 3px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.quiz-result {
+  display: none;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+  padding: 16px;
+}
+
+.quiz-result .question-container {
+  padding: 12px;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-result .question-container.incorrect {
+  background: #e63946;
+  color: #fff;
+}
+
+.question-number {
+  font-size: 16px;
+  margin-right: 16px;
+  background: #1d3557;
+  color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+@media (max-width: 700px) {
+  .quiz-container .options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.start-btn-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start-btn-container h2 {
+  font-size: 40px;
+  margin: 0;
+}
+
+.start-btn-container .start-btn {
+  background: #e63946;
+  color: #fff;
+  padding: 8px 32px;
+  border-radius: 8px;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+  </style>
   <body>
     <div class="start-btn-container">
       <h2>Manipulated</h2>
@@ -24,4 +155,193 @@
 
     <script src="/main.js"></script>
   </body>
+  <script>
+    let quizData = [
+  {
+    question: "/images/Manipulated Game-1.png",
+    options: ["AI", "Not AI"],
+    correct: "AI",
+  },
+  {
+    question: "/images/Manipulated Game-2.png",
+    options: ["AI", "Not AI"],
+    correct: "Not AI",
+  },
+  {
+    question:
+      "/images/Manipulated Game-3.png",
+    options: ["AI", "Not AI"],
+    correct: "AI",
+  },
+  {
+    question: "/images/Manipulated Game-4.png",
+    options: ["AI", "Not AI"],
+    correct: "Not AI",
+  },
+  {
+    question: "/images/Manipulated Game-5.png",
+    options: ["AI", "Not AI"],
+    correct: "Not AI",
+  },
+  {
+    question: "/images/Manipulated Game-6.png",
+    options: ["AI", "Not AI"],
+    correct: "AI",
+  },
+];
+
+const quizContainer = document.querySelector(".quiz-container");
+const question = document.querySelector(".quiz-container .question");
+const options = document.querySelector(".quiz-container .options");
+const nextBtn = document.querySelector(".quiz-container .next-btn");
+const quizResult = document.querySelector(".quiz-result");
+const startBtnContainer = document.querySelector(".start-btn-container");
+const startBtn = document.querySelector(".start-btn-container .start-btn");
+
+let questionNumber = 0;
+let score = 0;
+const MAX_QUESTIONS = 5;
+let timerInterval;
+
+const shuffleArray = (array) => {
+  return array.slice().sort(() => Math.random() - 0.5);
+};
+
+quizData = shuffleArray(quizData);
+
+const resetLocalStorage = () => {
+  for (i = 0; i < MAX_QUESTIONS; i++) {
+    localStorage.removeItem(`userAnswer_${i}`);
+  }
+};
+
+resetLocalStorage();
+
+const checkAnswer = (e) => {
+  let userAnswer = e.target.textContent;
+  if (userAnswer === quizData[questionNumber].correct) {
+    score++;
+    e.target.classList.add("correct");
+  } else {
+    e.target.classList.add("incorrect");
+  }
+
+  localStorage.setItem(`userAnswer_${questionNumber}`, userAnswer);
+
+  let allOptions = document.querySelectorAll(".quiz-container .option");
+  allOptions.forEach((o) => {
+    o.classList.add("disabled");
+  });
+};
+
+const createQuestion = () => {
+  clearInterval(timerInterval);
+
+  let secondsLeft = 9;
+  const timerDisplay = document.querySelector(".quiz-container .timer");
+  timerDisplay.classList.remove("danger");
+
+  timerDisplay.textContent = `Time Left: 10 seconds`;
+
+  timerInterval = setInterval(() => {
+    timerDisplay.textContent = `Time Left: ${secondsLeft
+      .toString()
+      .padStart(2, "0")} seconds`;
+    secondsLeft--;
+
+    if (secondsLeft < 3) {
+      timerDisplay.classList.add("danger");
+    }
+
+    if (secondsLeft < 0) {
+      clearInterval(timerInterval);
+      displayNextQuestion();
+    }
+  }, 1000);
+
+  options.innerHTML = "";
+  question.innerHTML = `<span class='question-number'>${
+    questionNumber + 1
+  }/${MAX_QUESTIONS}</span>${quizData[questionNumber].question}`;
+
+  const shuffledOptions = shuffleArray(quizData[questionNumber].options);
+
+  shuffledOptions.forEach((o) => {
+    const option = document.createElement("button");
+    option.classList.add("option");
+    option.innerHTML = o;
+    option.addEventListener("click", (e) => {
+      checkAnswer(e);
+    });
+    options.appendChild(option);
+  });
+};
+
+const retakeQuiz = () => {
+  questionNumber = 0;
+  score = 0;
+  quizData = shuffleArray(quizData);
+  resetLocalStorage();
+
+  createQuestion();
+  quizResult.style.display = "none";
+  quizContainer.style.display = "block";
+};
+
+const displayQuizResult = () => {
+  quizResult.style.display = "flex";
+  quizContainer.style.display = "none";
+  quizResult.innerHTML = "";
+
+  const resultHeading = document.createElement("h2");
+  resultHeading.innerHTML = `You have scored ${score} out of ${MAX_QUESTIONS}.`;
+  quizResult.appendChild(resultHeading);
+
+  for (let i = 0; i < MAX_QUESTIONS; i++) {
+    const resultItem = document.createElement("div");
+    resultItem.classList.add("question-container");
+
+    const userAnswer = localStorage.getItem(`userAnswer_${i}`);
+    const correctAnswer = quizData[i].correct;
+
+    let answeredCorrectly = userAnswer === correctAnswer;
+
+    if (!answeredCorrectly) {
+      resultItem.classList.add("incorrect");
+    }
+
+    resultItem.innerHTML = `<div class="question">Question ${i + 1}: ${
+      quizData[i].question
+    }</div>
+    <div class="user-answer">Your answer: ${userAnswer || "Not Answered"}</div>
+    <div class="correct-answer">Correct answer: ${correctAnswer}</div>`;
+
+    quizResult.appendChild(resultItem);
+  }
+
+  const retakeBtn = document.createElement("button");
+  retakeBtn.classList.add("retake-btn");
+  retakeBtn.innerHTML = "Retake Quiz";
+  retakeBtn.addEventListener("click", retakeQuiz);
+  quizResult.appendChild(retakeBtn);
+};
+
+const displayNextQuestion = () => {
+  if (questionNumber >= MAX_QUESTIONS - 1) {
+    displayQuizResult();
+    return;
+  }
+
+  questionNumber++;
+  createQuestion();
+};
+
+nextBtn.addEventListener("click", displayNextQuestion);
+
+startBtn.addEventListener("click", () => {
+  startBtnContainer.style.display = "none";
+  quizContainer.style.display = "block";
+  createQuestion();
+});
+  </script>
 </html>

@@ -155,170 +155,161 @@
 
 
   </body>
-  <script>
-    let quizData = [
-  {
-    question: "https://github.com/InvestigateTV/manipulatedgame/blob/0b0c76d73d7160a9d35278cf803b4d1d86b0a35b/images/Manipulated%20Game-1.png",
-    options: ["AI", "Not AI"],
-    correct: "AI",
-  },
-  {
-    question: "https://github.com/InvestigateTV/manipulatedgame/blob/9a951ff49df8ae6f0ceee2f70a5064a23fe407dd/images/Manipulated%20Game-2.png",
-    options: ["AI", "Not AI"],
-    correct: "Not AI",
-  },
-  {
-    question:
-      "https://github.com/InvestigateTV/manipulatedgame/blob/9a951ff49df8ae6f0ceee2f70a5064a23fe407dd/images/Manipulated%20Game-3.png",
-    options: ["AI", "Not AI"],
-    correct: "AI",
-  },
-  {
-    question: "https://github.com/InvestigateTV/manipulatedgame/blob/9a951ff49df8ae6f0ceee2f70a5064a23fe407dd/images/Manipulated%20Game-4.png",
-    options: ["AI", "Not AI"],
-    correct: "Not AI",
-  },
-  {
-    question: "https://github.com/InvestigateTV/manipulatedgame/blob/9a951ff49df8ae6f0ceee2f70a5064a23fe407dd/images/Manipulated%20Game-5.png",
-    options: ["AI", "Not AI"],
-    correct: "Not AI",
-  },
-  {
-    question: "https://github.com/InvestigateTV/manipulatedgame/blob/9a951ff49df8ae6f0ceee2f70a5064a23fe407dd/images/Manipulated%20Game-6.png",
-    options: ["AI", "Not AI"],
-    correct: "AI",
-  },
-];
+<script>
+  let quizData = [
+    {
+      question: "https://raw.githubusercontent.com/InvestigateTV/manipulatedgame/main/images/Manipulated%20Game-1.png",
+      options: ["AI", "Not AI"],
+      correct: "AI",
+    },
+    {
+      question: "https://raw.githubusercontent.com/InvestigateTV/manipulatedgame/main/images/Manipulated%20Game-2.png",
+      options: ["AI", "Not AI"],
+      correct: "Not AI",
+    },
+    {
+      question: "https://raw.githubusercontent.com/InvestigateTV/manipulatedgame/main/images/Manipulated%20Game-3.png",
+      options: ["AI", "Not AI"],
+      correct: "AI",
+    },
+    {
+      question: "https://raw.githubusercontent.com/InvestigateTV/manipulatedgame/main/images/Manipulated%20Game-4.png",
+      options: ["AI", "Not AI"],
+      correct: "Not AI",
+    },
+    {
+      question: "https://raw.githubusercontent.com/InvestigateTV/manipulatedgame/main/images/Manipulated%20Game-5.png",
+      options: ["AI", "Not AI"],
+      correct: "Not AI",
+    },
+    {
+      question: "https://raw.githubusercontent.com/InvestigateTV/manipulatedgame/main/images/Manipulated%20Game-6.png",
+      options: ["AI", "Not AI"],
+      correct: "AI",
+    },
+  ];
 
-const quizContainer = document.querySelector(".quiz-container");
-const question = document.querySelector(".quiz-container .question");
-const options = document.querySelector(".quiz-container .options");
-const submitBtn = document.querySelector(".quiz-container .submit-btn");
-const quizResult = document.querySelector(".quiz-result");
-const startBtnContainer = document.querySelector(".start-btn-container");
-const startBtn = document.querySelector(".start-btn-container .start-btn");
-const questionImage = document.getElementById("question-image");
-  questionImage.src = currentQuestion.question;
-let questionNumber = 0;
-let score = 0;
-const MAX_QUESTIONS = 5;
+  const quizContainer = document.querySelector(".quiz-container");
+  const questionNumberEl = document.querySelector(".question-number");
+  const options = document.querySelector(".options");
+  const submitBtn = document.querySelector(".submit-btn");
+  const quizResult = document.querySelector(".quiz-result");
+  const startBtnContainer = document.querySelector(".start-btn-container");
+  const startBtn = document.querySelector(".start-btn");
+  const questionImage = document.getElementById("question-image");
 
-const shuffleArray = (array) => {
-  return array.slice().sort(() => Math.random() - 0.5);
-};
+  let questionNumber = 0;
+  let score = 0;
+  const MAX_QUESTIONS = 5;
 
-quizData = shuffleArray(quizData);
+  const shuffleArray = (array) => array.slice().sort(() => Math.random() - 0.5);
 
-const resetLocalStorage = () => {
-  for (i = 0; i < MAX_QUESTIONS; i++) {
-    localStorage.removeItem(`userAnswer_${i}`);
-  }
-};
-
-resetLocalStorage();
-
-const checkAnswer = (e) => {
-  let userAnswer = e.target.textContent;
-  if (userAnswer === quizData[questionNumber].correct) {
-    score++;
-    e.target.classList.add("correct");
-  } else {
-    e.target.classList.add("incorrect");
-  }
-
-  localStorage.setItem(`userAnswer_${questionNumber}`, userAnswer);
-
-  let allOptions = document.querySelectorAll(".quiz-container .option");
-  allOptions.forEach((o) => {
-    o.classList.add("disabled");
-  });
-};
-
-const createQuestion = () => {
-
-  options.innerHTML = "";
-  question.innerHTML = `<span class='question-number'>${
-    questionNumber + 1
-  }/${MAX_QUESTIONS}</span>${quizData[questionNumber].question}`;
-
-  const shuffledOptions = shuffleArray(quizData[questionNumber].options);
-
-  shuffledOptions.forEach((o) => {
-    const option = document.createElement("button");
-    option.classList.add("option");
-    option.innerHTML = o;
-    option.addEventListener("click", (e) => {
-      checkAnswer(e);
-    });
-    options.appendChild(option);
-  });
-};
-
-const retakeQuiz = () => {
-  questionNumber = 0;
-  score = 0;
   quizData = shuffleArray(quizData);
-  resetLocalStorage();
 
-  createQuestion();
-  quizResult.style.display = "none";
-  quizContainer.style.display = "block";
-};
+  const resetLocalStorage = () => {
+    for (let i = 0; i < MAX_QUESTIONS; i++) {
+      localStorage.removeItem(`userAnswer_${i}`);
+    }
+  };
 
-const displayQuizResult = () => {
-  quizResult.style.display = "flex";
-  quizContainer.style.display = "none";
-  quizResult.innerHTML = "";
+  const checkAnswer = (e) => {
+    const userAnswer = e.target.textContent;
+    const correctAnswer = quizData[questionNumber].correct;
 
-  const resultHeading = document.createElement("h2");
-  resultHeading.innerHTML = `You have scored ${score} out of ${MAX_QUESTIONS}.`;
-  quizResult.appendChild(resultHeading);
-
-  for (let i = 0; i < MAX_QUESTIONS; i++) {
-    const resultItem = document.createElement("div");
-    resultItem.classList.add("question-container");
-
-    const userAnswer = localStorage.getItem(`userAnswer_${i}`);
-    const correctAnswer = quizData[i].correct;
-
-    let answeredCorrectly = userAnswer === correctAnswer;
-
-    if (!answeredCorrectly) {
-      resultItem.classList.add("incorrect");
+    if (userAnswer === correctAnswer) {
+      score++;
+      e.target.classList.add("correct");
+    } else {
+      e.target.classList.add("incorrect");
     }
 
-    resultItem.innerHTML = `<div class="question">Question ${i + 1}: ${
-      quizData[i].question
-    }</div>
-    <div class="user-answer">Your answer: ${userAnswer || "Not Answered"}</div>
-    <div class="correct-answer">Correct answer: ${correctAnswer}</div>`;
+    localStorage.setItem(`userAnswer_${questionNumber}`, userAnswer);
 
-    quizResult.appendChild(resultItem);
-  }
+    const allOptions = document.querySelectorAll(".option");
+    allOptions.forEach((o) => o.classList.add("disabled"));
+  };
 
-  const retakeBtn = document.createElement("button");
-  retakeBtn.classList.add("retake-btn");
-  retakeBtn.innerHTML = "Retake Quiz";
-  retakeBtn.addEventListener("click", retakeQuiz);
-  quizResult.appendChild(retakeBtn);
-};
+  const createQuestion = () => {
+    const currentQuestion = quizData[questionNumber];
 
-const displayNextQuestion = () => {
-  if (questionNumber >= MAX_QUESTIONS - 1) {
-    displayQuizResult();
-    return;
-  }
+    options.innerHTML = "";
+    questionImage.src = currentQuestion.question;
+    questionNumberEl.textContent = `Question ${questionNumber + 1} of ${MAX_QUESTIONS}`;
 
-  questionNumber++;
-  createQuestion();
-};
+    const shuffledOptions = shuffleArray(currentQuestion.options);
 
-submitBtn.addEventListener("click", displayNextQuestion);
+    shuffledOptions.forEach((opt) => {
+      const option = document.createElement("button");
+      option.classList.add("option");
+      option.textContent = opt;
+      option.addEventListener("click", checkAnswer);
+      options.appendChild(option);
+    });
+  };
 
-startBtn.addEventListener("click", () => {
-  startBtnContainer.style.display = "none";
-  quizContainer.style.display = "block";
-  createQuestion();
-});
-  </script>
+  const displayQuizResult = () => {
+    quizResult.innerHTML = "";
+    quizResult.style.display = "flex";
+    quizContainer.style.display = "none";
+
+    const resultHeading = document.createElement("h2");
+    resultHeading.textContent = `You scored ${score} out of ${MAX_QUESTIONS}.`;
+    quizResult.appendChild(resultHeading);
+
+    for (let i = 0; i < MAX_QUESTIONS; i++) {
+      const resultItem = document.createElement("div");
+      resultItem.classList.add("question-container");
+
+      const userAnswer = localStorage.getItem(`userAnswer_${i}`) || "Not Answered";
+      const correctAnswer = quizData[i].correct;
+
+      if (userAnswer !== correctAnswer) {
+        resultItem.classList.add("incorrect");
+      }
+
+      resultItem.innerHTML = `
+        <div><strong>Question ${i + 1}:</strong></div>
+        <img src="${quizData[i].question}" alt="Question ${i + 1}" style="max-width: 300px;"><br>
+        <div>Your answer: ${userAnswer}</div>
+        <div>Correct answer: ${correctAnswer}</div>
+      `;
+
+      quizResult.appendChild(resultItem);
+    }
+
+    const retakeBtn = document.createElement("button");
+    retakeBtn.textContent = "Retake Quiz";
+    retakeBtn.classList.add("retake-btn");
+    retakeBtn.addEventListener("click", () => {
+      questionNumber = 0;
+      score = 0;
+      quizData = shuffleArray(quizData);
+      resetLocalStorage();
+      quizResult.style.display = "none";
+      quizContainer.style.display = "block";
+      createQuestion();
+    });
+
+    quizResult.appendChild(retakeBtn);
+  };
+
+  const displayNextQuestion = () => {
+    if (questionNumber >= MAX_QUESTIONS - 1) {
+      displayQuizResult();
+    } else {
+      questionNumber++;
+      createQuestion();
+    }
+  };
+
+  submitBtn.addEventListener("click", displayNextQuestion);
+
+  startBtn.addEventListener("click", () => {
+    startBtnContainer.style.display = "none";
+    quizContainer.style.display = "block";
+    resetLocalStorage();
+    createQuestion();
+  });
+</script>
+
 </html>

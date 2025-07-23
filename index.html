@@ -47,10 +47,44 @@
 .option.correct {
   background: #51e351;
   color: #222;
+  position: relative; /* needed for ::after positioning */
+  border: 3px solid #2db82d; /* green border */
+}
+
+.option.correct::after {
+  content: "Correct!";
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #51e351;
+  color: #222;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .option.incorrect {
   background: #e63946;
+  position: relative;
+  border: 3px solid #b92b2b; /* red border */
+}
+
+.option.incorrect::after {
+  content: "Incorrect";
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e63946;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .quiz-container .next-btn,

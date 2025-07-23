@@ -249,16 +249,17 @@
     questionImage.src = currentQuestion.question;
     questionNumberEl.textContent = `Question ${questionNumber + 1} of ${MAX_QUESTIONS}`;
 
-    const shuffledOptions = shuffleArray(currentQuestion.options);
+  // Use options as-is, no shuffle
+  const optionsList = currentQuestion.options;
 
-    shuffledOptions.forEach((opt) => {
-      const option = document.createElement("button");
-      option.classList.add("option");
-      option.textContent = opt;
-      option.addEventListener("click", checkAnswer);
-      options.appendChild(option);
-    });
-  };
+  optionsList.forEach((opt) => {
+    const option = document.createElement("button");
+    option.classList.add("option");
+    option.textContent = opt;
+    option.addEventListener("click", checkAnswer);
+    options.appendChild(option);
+  });
+};
 
   const displayQuizResult = () => {
     quizResult.innerHTML = "";

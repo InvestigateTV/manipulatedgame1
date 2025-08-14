@@ -7,17 +7,23 @@
   </head>
   <style>
   .quiz-container {
-  font-family: "Roboto", sans-serif;
-  font-color: #fff
-  max-width: 900px;
+  background: url("https://raw.githubusercontent.com/InvestigateTV/manipulatedgame1/main/images/manipulated_matchup_bg.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  font-family: "Arial", Helvetica, sans-serif;
+  font-color: #fff;
   margin: 0 auto;
-  padding: 6px;
   display: none;
+    padding: 6px;
+  align-items: center;
 }
 
 
 .quiz-container h1 {
+  font-family: "Arial", Helvetica, sans-serif;
+  font-weight: normal;
   text-align: center;
+  color: #fff
 }
 
 .quiz-container .options {
@@ -46,10 +52,10 @@
 }
 
 .option.correct {
-  background: #51e351;
+  background: #A3C76E;
   color: #222;
   position: relative; 
-  border: 3px solid #2db82d; 
+  border: 3px solid #415C1D; 
 }
 
 .option.correct::after {
@@ -58,18 +64,18 @@
   top: -28px;
   left: 50%;
   transform: translateX(-50%);
-  background: #51e351;
+  background: #A3C76E;
   color: #222;
   padding: 4px 8px;
   border-radius: 4px;
   font-weight: bold;
   font-size: 14px;
   white-space: nowrap;
-  border: 3px solid #2db82d
+  border: 3px solid #415C1D
 }
 
 .option.incorrect {
-  background: #e63946;
+  background: #EF5D4C;
   position: relative;
   border: 3px solid #b92b2b; 
 }
@@ -80,7 +86,7 @@
   top: -28px;
   left: 50%;
   transform: translateX(-50%);
-  background: #e63946;
+  background: #EF5D4C;
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
@@ -92,7 +98,7 @@
 
 .quiz-container .next-btn,
 .quiz-result .retake-btn {
-  background: #E8DF08;
+  background: #12326D;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -102,29 +108,44 @@
   font-weight: bold;
   letter-spacing: 3px;
   cursor: pointer;
-  width: fit-content;
+  width: 100%;
 }
 
 .quiz-result {
   display: none;
   flex-direction: column;
-  gap: 24px;
-  max-width: 900px;
+  gap: 8px;
   margin: 0 auto;
-  font-family: "Roboto", sans-serif;
-  padding: 16px;
+  font-family: "Arial", Helvetica, sans-serif;
+  color: #fff;
+  padding: 8px;
+}
+
+.quiz-result h2 {
+  font-family: "Arial", Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: center;
+  color: #fff
 }
 
 .quiz-result .question-container {
-  padding: 12px;
-  border: 1px solid #E8DF08;
+  padding: 6px;
+  border: 1px solid #9EB8EB;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  height: 100%;
+  flex-flow: row;
+  flex-shrink: 3;
+  gap: 8px;
+  text-align: center;
 }
 
 .quiz-result .question-container.incorrect {
   background: #e63946;
+  color: #fff;
+}
+.quiz-result .question-container.correct
+{
+  background: #A3C76E;
   color: #fff;
 }
 
@@ -145,14 +166,14 @@
   }
 }
 
+
 .start-btn-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #000000
-  font-family: "Roboto", sans-serif;
-  color: #fff
+  position: static;
+  
+  font-family: "Arial", Helvetica, sans-serif;
+  font-weight: normal;
+  color: #fff;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -164,12 +185,14 @@
 }
 
 .start-btn-container .start-btn {
+  position: relative;
+  top: 50%;
   background: #9EB8EB;
   color: #fff;
   padding: 8px 32px;
   border-radius: 8px;
   border: none;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: bold;
@@ -190,8 +213,8 @@
   
   <body style="background-color:#000000;">
     <div class="start-btn-container">
-      <img src="https://raw.githubusercontent.com/InvestigateTV/manipulatedgame1/main/images/manipulated_matchup.png" alt="Illustration of a hand below a glowing set of lines and dots designed to represent artificial intelligence. The words manipulated matchup are printed above the illustration" width=100%>
-      <p style="color:#fff;">Test your skills at identifying AI generated images! </p>
+      <img src="https://raw.githubusercontent.com/InvestigateTV/manipulatedgame1/main/images/manipulated_matchup.png" alt="Illustration of a hand below a glowing set of lines and dots designed to represent artificial intelligence. The words manipulated matchup are printed above the illustration" width=100% margin=0 >
+      <p style="color:#fff;">Test your skills at identifying <br> AI generated images </p>
       <button class="start-btn">Start Quiz</button>
     </div>
 
@@ -319,12 +342,16 @@
       if (userAnswer !== correctAnswer) {
         resultItem.classList.add("incorrect");
       }
+      if (userAnswer == correctAnswer) {
+        resultItem.classList.add("correct");
+      }
 
       resultItem.innerHTML = `
-        <div><strong>Question ${i + 1}:</strong></div>
-        <img src="${quizData[i].question}" alt="Question ${i + 1}" style="max-width: 300px;"><br>
-        <div>Your answer: ${userAnswer}</div>
-        <div>Correct answer: ${correctAnswer}</div>
+        <img src="${quizData[i].question}" alt="Question ${i + 1}" style="max-height: 10vh">
+        <br>
+        <div><strong>Your answer:</strong><br>  ${userAnswer}</div>
+        <br>
+        <div><strong>Correct answer:</strong> <br> ${correctAnswer}</div>
       `;
 
       quizResult.appendChild(resultItem);
@@ -366,3 +393,5 @@
 </script>
 
 </html>
+
+

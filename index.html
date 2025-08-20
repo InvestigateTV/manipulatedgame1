@@ -18,6 +18,22 @@
   align-items: center;
 }
 
+.footer-image-container {
+	position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 6px;
+}
+.footer-image-container img {
+	display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
 
 .quiz-container h1 {
   font-family: "Arial", Helvetica, sans-serif;
@@ -168,7 +184,7 @@
 
 
 .start-btn-container {
-  position: static;
+  position: fixed;
   
   font-family: "Arial", Helvetica, sans-serif;
   font-weight: normal;
@@ -186,7 +202,7 @@
 
 .start-btn-container .start-btn {
   position: relative;
-  top: 50%;
+  top: 60%;
   background: #9EB8EB;
   color: #fff;
   padding: 8px 32px;
@@ -197,7 +213,44 @@
   text-transform: uppercase;
   font-weight: bold;
 }
-    
+
+
+.return-btn-container {
+  position: fixed;
+  top: 85%;
+  font-family: "Arial", Helvetica, sans-serif;
+  font-weight: normal;
+  color: #000; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap; 
+  gap: 5px; 
+}
+
+.return-btn-container .return-btn .special-font {
+	font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    color: #FFF;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    font-size:16px;
+}
+
+.return-btn-container .return-btn {
+  background: rgba(93, 146, 88, 0.7);
+  color: #FFF; 
+  padding: 6px 24px;
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: normal; 
+}
+
+
 .quiz-container img.question {
   max-width: 100%;
   max-height: 30vh; 
@@ -215,6 +268,7 @@
     <div class="start-btn-container">
       <img src="https://raw.githubusercontent.com/InvestigateTV/manipulatedgame1/main/images/manipulated_matchup.png" alt="Illustration of a hand below a glowing set of lines and dots designed to represent artificial intelligence. The words manipulated matchup are printed above the illustration" width=100% margin=0 >
       <p style="color:#fff;">Test your skills at identifying <br> AI generated images </p>
+      <br>
       <button class="start-btn">Start Quiz</button>
     </div>
 
@@ -227,6 +281,12 @@
     </div>
 
     <div class="quiz-result"></div>
+   	<div class="return-btn-container">
+    <button class="return-btn">Exit to the <span class="special-font"> mAnIpulated</span> Homepage</button>
+</div>
+   	<div class="footer-image-container">
+    	<img src="https://raw.githubusercontent.com/InvestigateTV/manipulatedgame1/main/images/GTV-Clear-Logomark-RGB-color.png" alt="Gray Media Logo: Colorful partial circles arranged to form the letter G">
+</div>
   </body>
 
   
@@ -393,5 +453,3 @@
 </script>
 
 </html>
-
-

@@ -51,13 +51,13 @@
 .quiz-container .options {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 6px;
+  margin-bottom: 10px;
 }
 
 .quiz-container .option {
   border: none;
-  padding: 20px 28px;
+  padding: 16px 24px;
   font-size: 18px;
   background: #9EB8EB;
   color: #fff;
@@ -136,7 +136,7 @@
 .quiz-result {
   display: none;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   margin: 0 auto;
   font-family: "Arial", Helvetica, sans-serif;
   color: #fff;
@@ -157,8 +157,9 @@
   height: 100%;
   flex-flow: row;
   flex-shrink: 3;
-  gap: 8px;
+  gap: 4px;
   text-align: center;
+  border-radius: 6px;
 }
 
 .quiz-result .question-container.incorrect {
@@ -517,7 +518,7 @@
       }
 
       resultItem.innerHTML = `
-        <img src="${quizData[i].question}" alt="Question ${i + 1}" style="max-height: 10vh">
+        <img src="${quizData[i].question}" alt="Question ${i + 1}" style="max-height: 8vh">
         <br>
         <div><strong>Your answer:</strong><br>  ${userAnswer}</div>
         <br>
